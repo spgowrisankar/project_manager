@@ -101,6 +101,7 @@
 						<div class="form-group">
 							<label for="issue_image" class="control-label">Issue Image</label>
 							<input type="file" class="form-control" id="issue_image" name="issue_image">
+							<input type="hidden" name="img_updated" id="img_value" value="">
 							<div class="modal_image" id="modal_image">
 								<img src="" alt="issue_image">
 							</div>
@@ -108,6 +109,7 @@
 						<div class="form-group">
 							<label for="issue_video" class="control-label">Issue Video</label>
 							<input type="file" class="form-control" id="issue_video" name="issue_video">
+							<input type="hidden" name="vid_updated" id="vid_value" value="">
 							<div class="modal_video" id="modal_video">
 							<video src="" width="280" height="200" controls autoplay poster="assets/images/novideo.png"></video>
 							</div>

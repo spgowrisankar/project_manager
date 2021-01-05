@@ -52,8 +52,10 @@ $(document).ready(function() {
                     $('#issue_video').html(data.issue_video);
                     var issue_imgPath = 'img_uploads/' + data.issue_image;
                     $(".modal_image img").attr("src",issue_imgPath);
+                    $("#issue_image").html(data.issue_image);
                     var issue_videoPath = 'vid_uploads/' + data.issue_video;
                     $(".modal_video video").attr("src",issue_videoPath);
+                    $("#issue_video").html(data.issue_video);
                     $('.modal-title').text("Edit Issue");
                     $('#action').val('updateIssue');
                     $('#save').val('Save');
