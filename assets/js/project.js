@@ -5,7 +5,7 @@ $(document).ready(function() {
             keyboard: false
         });
         $('#projectForm')[0].reset();
-        $('.modal-title').html("<i class='fa fa-plus'></i> Add Project");
+        $('.modal-title').html("Add Project");
         $('#action').val('addProject');
         $('#save').val('Save');
     });

@@ -33,5 +33,4 @@ foreach ($row as $result) {
 }
 ?>
 </table>
-<script src="./assets/js/project.js"></script>
 <?php  include './includes/footer.php' ?>

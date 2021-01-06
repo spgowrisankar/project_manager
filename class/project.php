@@ -3,8 +3,8 @@ require_once('./config/database.php');
 
 class Project extends Database {
     private $table = 'projects';
-    private $statustable = 'project_status';
-    private $usertable = 'users';
+    private $status_table = 'project_status';
+    private $user_table = 'users';
     private $conn;
 
     public function __construct($db) {
@@ -28,8 +28,8 @@ class Project extends Database {
     public function listProject() {
         $list_projects = "SELECT p.id, p.project_name, u.username, p.created_at, s.status, p.dev_date, p.launch_date";
         $list_projects .= " FROM ".$this->table." p";
-        $list_projects .= " LEFT JOIN ".$this->statustable." s ON s.id = p.status_id";
-        $list_projects .= " LEFT JOIN ".$this->usertable." u ON u.user_id = p.project_manager_id";
+        $list_projects .= " LEFT JOIN ".$this->status_table." s ON s.id = p.status_id";
+        $list_projects .= " LEFT JOIN ".$this->user_table." u ON u.user_id = p.project_manager_id";
         $list_projects .= " WHERE p.status_code = '0'";
         $stmt = $this->conn->prepare($list_projects);
         $stmt->execute();
@@ -43,7 +43,7 @@ class Project extends Database {
 
     // PM List
     public function managerList() {
-        $manager_query = "SELECT * FROM ".$this->usertable." WHERE role='pm'";
+        $manager_query = "SELECT * FROM ".$this->user_table." WHERE role='pm'";
         $stmt = $this->conn->prepare($manager_query);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -112,8 +112,8 @@ class Project extends Database {
     public function assignedProject() {
         $dev_projects = "SELECT p.id, p.project_name, u.username, p.created_at, s.status, p.dev_date, p.launch_date";
         $dev_projects .= " FROM ".$this->table." p";
-        $dev_projects .= " LEFT JOIN ".$this->statustable." s ON s.id = p.status_id";
-        $dev_projects .= " LEFT JOIN ".$this->usertable." u ON u.user_id = p.project_manager_id";
+        $dev_projects .= " LEFT JOIN ".$this->status_table." s ON s.id = p.status_id";
+        $dev_projects .= " LEFT JOIN ".$this->user_table." u ON u.user_id = p.project_manager_id";
         $dev_projects .= " WHERE p.status_code = '0' AND p.developer_id = {$_SESSION['user_id']}";
         $stmt = $this->conn->prepare($dev_projects);
         $stmt->execute();

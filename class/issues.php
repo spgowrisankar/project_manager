@@ -3,9 +3,8 @@ require_once('./config/database.php');
 
 class Issues extends Database {
     private $table = 'issues';
-    private $projectstable = 'projects';
+    private $projects_table = 'projects';
     private $issue_status = 'issue_status';
-    private $usertable = 'users';
     private $conn;
 
     public function __construct($db) {
@@ -24,7 +23,7 @@ class Issues extends Database {
         $list_issues = "SELECT i.id, p.project_name, i.issue_title , i.issue_desc, i.issue_image, i.issue_video, c.status, i.created_at, i.page_link";
         $list_issues .= " FROM ".$this->table." i";
         $list_issues .= " LEFT JOIN ".$this->issue_status." c ON c.id = i.issue_status_id ";
-        $list_issues .= " LEFT JOIN ".$this->projectstable." p ON p.id = i.project_id";
+        $list_issues .= " LEFT JOIN ".$this->projects_table." p ON p.id = i.project_id";
         $list_issues .= " WHERE i.status_code = '0'";
         $stmt = $this->conn->prepare($list_issues);
         $stmt->execute();

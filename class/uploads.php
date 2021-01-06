@@ -12,7 +12,6 @@ class Uploads extends Database {
         $img_response = '';
         if(isset($_FILES['issue_image']['name'])) {
             $uploadDir = 'img_uploads/';
-
             $fileName = basename($_FILES["issue_image"]["name"]);
             $targetFilePath = $uploadDir . $fileName;
             $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);

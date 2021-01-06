@@ -1,12 +1,12 @@
 <?php
 include_once 'class/issues.php';
 include_once 'class/uploads.php';
+
 $database = new Database();
 $db = $database->getConnection();
 
 $issues = new Issues($db);
 $uploads = new Uploads($db);
-
 
 $uploadImgFile = $uploads->uploadImgFile();
 $uploadVidFile = $uploads->uploadVidFile();
