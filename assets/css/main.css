@@ -235,6 +235,8 @@ input[type=submit].modal_button {
     padding: 10px 30px;
 }
 .modal_image img {
+    color: #C23934;
+    font-weight: bold;
     max-width: 30%;
     padding: 5px;
     transition: transform .5s;
