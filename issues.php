@@ -21,7 +21,7 @@ include './dashboard.php';
 	<button type="button" id="addIssue" class="btn button" title="Add Issue"><img src='./assets/images/plus.png' alt='Add-Issue'></button>
 </div>
 <div class="table-wrapper">
-	<table class="table" >
+	<table class="table">
 		<thead>
 			<tr>
 				<th>ID</th>

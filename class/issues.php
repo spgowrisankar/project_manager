@@ -10,7 +10,7 @@ class Issues extends Database {
     public function __construct($db) {
         $this->conn = $db;
     }
-
+    // To Get Project List for dropdown
     public function projectsList() {
         $projects_query = "SELECT * FROM ".$this->projects_table." WHERE status_code = '0'";
         $stmt = $this->conn->prepare($projects_query);
@@ -19,6 +19,7 @@ class Issues extends Database {
         return $result;
     }
 
+    // To Show Issues
     public function listIssues() {
         $list_issues = "SELECT i.id, p.project_name, i.issue_title , i.issue_desc, i.issue_image, i.issue_video, c.status, i.created_at, i.page_link";
         $list_issues .= " FROM ".$this->table." i";
@@ -35,6 +36,7 @@ class Issues extends Database {
         return $data;
     }
 
+    // Getting  Issue with Respective Id
     public function getIssue() {
         if($this->id) {
             $sqlQuery = "SELECT * FROM ".$this->table." ";
@@ -49,6 +51,7 @@ class Issues extends Database {
         return $result;
     }
 
+    // Insert Issue
     public function insertIssue() {
         if($this->project_id) {
             $insert_query = "INSERT INTO ".$this->table."(`issue_title`, `issue_desc`,`issue_status_id`,`issue_image`,`issue_video`, `page_link`, `project_id`)";
@@ -69,6 +72,7 @@ class Issues extends Database {
         return false;
     }
 
+    // To Update Issue
     public function updateIssue() {
         if($this->id) {
             $update_query = "UPDATE ".$this->table." ";
@@ -89,6 +93,7 @@ class Issues extends Database {
         return false;
     }
 
+    // To Update Media Files
     public function updateMedia() {
         if($this->id && $_FILES['issue_image']['name'] != '') {
             $media_query = "UPDATE ".$this->table." ";
@@ -105,7 +110,7 @@ class Issues extends Database {
         }
         return false;
     }
-
+    // To Delete Respective Issue
     public function delete() {
         if($this->id) {
             $delete_query = "UPDATE ".$this->table." SET `status_code` = '1' ";
@@ -119,6 +124,8 @@ class Issues extends Database {
         }
         return false;
     }
+
+    // To Show Issue For Respective Developers
     public function assignedIssues() {
         $list_issues = "SELECT i.id, p.project_name, i.issue_title , i.issue_desc, i.issue_image, i.issue_video, c.status, i.created_at, i.page_link";
         $list_issues .= " FROM ".$this->table." i";

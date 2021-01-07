@@ -36,6 +36,7 @@ if(!empty($_POST['action']) && $_POST['action'] == 'updateIssue') {
 	$issues->page_link = $_POST["page_link"];
 	$issues->updateIssue();
 }
+
 if(!empty($_POST['action']) && $_POST['action'] == 'updateIssue') {
 	$issues->id = $_POST["id"];
 	$issues->issue_image = $uploadImgFile;
