@@ -33,10 +33,14 @@ if(!empty($_POST['action']) && $_POST['action'] == 'updateIssue') {
 	$issues->issue_title = $_POST["issue_title"];
 	$issues->issue_desc = $_POST["issue_desc"];
 	$issues->issue_status_id = $_POST["issue_status_id"];
-	$issues->issue_image = $uploadImgFile;
-	$issues->issue_video = $uploadVidFile;
 	$issues->page_link = $_POST["page_link"];
 	$issues->updateIssue();
+}
+if(!empty($_POST['action']) && $_POST['action'] == 'updateIssue') {
+	$issues->id = $_POST["id"];
+	$issues->issue_image = $uploadImgFile;
+	$issues->issue_video = $uploadVidFile;
+	$issues->updateMedia();
 }
 
 if(!empty($_POST['action']) && $_POST['action'] == 'deleteIssue') {

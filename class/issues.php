@@ -72,7 +72,7 @@ class Issues extends Database {
     public function updateIssue() {
         if($this->id) {
             $update_query = "UPDATE ".$this->table." ";
-            $update_query .= "SET `issue_title` = ?, `issue_desc` = ?, `issue_status_id` = ?,`issue_image` = ?,`issue_video` = ?, `page_link` = ?, `project_id` = ? ";
+            $update_query .= "SET `issue_title` = ?, `issue_desc` = ?, `issue_status_id` = ?, `page_link` = ?, `project_id` = ? ";
             $update_query .= "WHERE id = ? ";
             $stmt = $this->conn->prepare($update_query);
             $this->id = htmlspecialchars(strip_tags($this->id));
@@ -80,10 +80,25 @@ class Issues extends Database {
             $this->issue_title = htmlspecialchars(strip_tags($this->issue_title));
             $this->issue_desc  = htmlspecialchars(strip_tags($this->issue_desc));
             $this->issue_status_id = htmlspecialchars(strip_tags($this->issue_status_id));
+            $this->page_link = htmlspecialchars(strip_tags($this->page_link));
+            $stmt->bind_param("ssisii", $this->issue_title, $this->issue_desc, $this->issue_status_id, $this->page_link, $this->project_id,$this->id);
+            if($stmt->execute()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function updateMedia() {
+        if($this->id && $_FILES['issue_image']['name'] != '') {
+            $media_query = "UPDATE ".$this->table." ";
+            $media_query .= "SET `issue_image` = ?,`issue_video` = ? ";
+            $media_query .= "WHERE id = ? ";
+            $stmt = $this->conn->prepare($media_query);
+            $this->id = htmlspecialchars(strip_tags($this->id));
             $this->issue_image = htmlspecialchars(strip_tags($this->issue_image));
             $this->issue_video = htmlspecialchars(strip_tags($this->issue_video));
-            $this->page_link = htmlspecialchars(strip_tags($this->page_link));
-            $stmt->bind_param("ssisssii", $this->issue_title, $this->issue_desc, $this->issue_status_id, $this->issue_image, $this->issue_video, $this->page_link, $this->project_id,$this->id);
+            $stmt->bind_param("ssi", $this->issue_image, $this->issue_video, $this->id);
             if($stmt->execute()) {
                 return true;
             }
